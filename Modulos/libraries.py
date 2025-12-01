@@ -1,9 +1,12 @@
+from Modulos.avaluate import Evaluating
+
 class Library:
     libraries = []
 
     def __init__(self, name):
         self.name = name
         self._active = False
+        self.evaluation = []
         Library.libraries.append(self)
 
     def __str__(self):
@@ -20,4 +23,8 @@ class Library:
 
     @property
     def active(self):
-        "Ativada" if self._active else "Desativada"
+        return "Ativada" if self._active else "Desativada"
+
+    def receive_evaluation(self, client, note):
+        evaluate = Evaluating(client, note)
+        self.evaluation.append(evaluate)
