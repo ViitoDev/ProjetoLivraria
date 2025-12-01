@@ -21,8 +21,8 @@ class Library:
         "Ativada" if self._active else "Desativada"
     
 city_library = Library("City Library")
-city_library.toggle_state()
 shopping_library = Library("Shopping Library")
+city_library.toggle_state()
 shopping_library.toggle_state()
 
 Library.list_Libraries()
