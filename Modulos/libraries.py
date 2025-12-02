@@ -1,4 +1,5 @@
 from Modulos.avaluate import Evaluating
+from Modulos.items.library_item import LibraryItem
 
 class Library:
     libraries = []
@@ -7,6 +8,7 @@ class Library:
         self.name = name
         self._active = False
         self.evaluation = []
+        self.items = []
         Library.libraries.append(self)
 
     def __str__(self):
@@ -14,7 +16,7 @@ class Library:
     
     @classmethod
     def list_Libraries(cls):
-        print(f"{'Nome da biblioteca'.ljust(25)}| {'Nota média'.ljust(25)} | {'Status'}")
+        print(f"{'Library name'.ljust(25)}| {'Avarege note'.ljust(25)} | {'Status'}")
         for library in Library.libraries:
             print(f"{library.name.ljust(25)}| {str(library.evaluate_media).ljust(25)} | {library.active}")
 
@@ -39,3 +41,17 @@ class Library:
         sum1 = sum(evaluate._note for evaluate in self.evaluation)
         average = round(sum1 / len(self.evaluation))
         return average
+    
+    def add_item(self, item):
+        if isinstance(item, LibraryItem):
+            self.items.append(item)
+
+    def show_items(self):
+        print(f"Library items {self.name}\n")
+        for i, item in enumerate(self.items, start=1):
+            if hasattr(item, "isbn"):
+                book_msg = f"{i}. Title: {item._title} | Author: {item._author} | Price: {item._price} | ISBN: {item.isbn}"
+                print(book_msg)
+            else:
+                magazine_msg = f"{i}. Title: {item._title} | Author: {item._author} | Price: {item._price} | Edition: {item.edition}"
+                print(magazine_msg)
